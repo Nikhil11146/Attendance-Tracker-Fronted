@@ -6,7 +6,7 @@ export default function SubjectCard({ name, attendedClasses, totalClasses, facul
             <div className="subject-info">
                 <div className="subject-name">Subject Name: {name}</div>
                 <div className="event-info">
-                    <div className="subject-perc">{totalClasses === 0 ? "0 %" : (attendedClasses/totalClasses)*100} %</div>
+                    <div className="subject-perc">{totalClasses === 0 ? "0 %" : (attendedClasses/totalClasses)*100 + " %"}</div>
                     <div className="subject-attended">{attendedClasses} / {totalClasses}</div>
                 </div>
                 {faculty && (<div className="subject-faculty">Faculty: {faculty}</div>)}
