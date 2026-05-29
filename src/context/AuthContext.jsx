@@ -35,7 +35,7 @@ export default function AuthProvider({ children }) {
         localStorage.removeItem("accessToken");
         setIsAuthenticated(false);
         setToken(null);
-        navigate("/", { replace: true });
+        navigate("/auth", { replace: true });
     }
 
     return (
