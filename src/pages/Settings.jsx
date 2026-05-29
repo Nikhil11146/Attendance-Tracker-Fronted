@@ -1,5 +1,7 @@
 export default function Settings() {
     return (
-        <h1>Settings</h1>
+        <div className="settings-page">
+            <h1 className="heading">Settings</h1>
+        </div>
     )
 }

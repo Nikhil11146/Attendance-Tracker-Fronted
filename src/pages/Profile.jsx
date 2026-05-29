@@ -14,7 +14,7 @@ export default function Profile() {
 
     return (
         <div className="profile-page">
-            <h1>Profile</h1>
+            <h1 className="heading">Profile</h1>
             <div>{JSON.stringify(user)}</div>
         </div>
     )
