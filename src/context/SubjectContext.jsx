@@ -12,8 +12,12 @@ export default function SubjectProvider({ children }) {
         }
     }
 
+    async function updateSubject(values, _id) {
+        await api.put(`/subjects/${_id}`, values);
+    }
+
     return (
-        <SubjectContext.Provider value={{ getSubjects }}>
+        <SubjectContext.Provider value={{ getSubjects, updateSubject }}>
             {children}
         </SubjectContext.Provider>
     )

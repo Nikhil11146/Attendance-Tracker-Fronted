@@ -4,9 +4,8 @@ import {useAuth} from "../context/AuthContext.jsx";
 
 export default function Auth() {
     const { register, handleSubmit, formState: { errors, isSubmitting  }} = useForm();
-    const [ isSignUp, setIsSignUp ] = useState(false);
     const [ apiError, setApiError ] = useState(null);
-    const { signIn, signUp } = useAuth();
+    const { signIn, signUp, isSignUp, setIsSignUp } = useAuth();
 
     const onSubmit = async (values) => {
         setApiError(null);

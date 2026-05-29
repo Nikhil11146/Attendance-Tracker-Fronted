@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Auth from "./pages/Auth.jsx";
 import About from "./pages/About.jsx";
+import Profile from "./pages/Profile.jsx";
+import Settings from "./pages/Settings.jsx";
 
 function App() {
 
@@ -15,6 +17,8 @@ function App() {
               <Route path='/home' element={<Home/>}/>
               <Route path='/about' element={<About/>}/>
               <Route path='/auth' element={<Auth/>}/>
+              <Route path='/profile' element={<Profile/>}/>
+              <Route path='/settings' element={<Settings/>}/>
           </Routes>
       </div>
   )
