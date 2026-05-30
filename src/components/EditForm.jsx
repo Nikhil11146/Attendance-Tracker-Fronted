@@ -1,7 +1,7 @@
 import {useForm} from "react-hook-form";
 import {useSubject} from "../context/SubjectContext.jsx";
 
-export default function EditFunction({ setIsEditing, subjectDetails }) {
+export default function EditFunction({ setIsEditing, subjectDetails, setTotal, setAttended }) {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
         defaultValues: subjectDetails
     });
@@ -11,6 +11,8 @@ export default function EditFunction({ setIsEditing, subjectDetails }) {
     async function onSubmit(values) {
         try {
             await updateSubject(values,  subjectDetails._id);
+            setTotal(values.totalClasses);
+            setAttended(values.attendedClasses);
         } catch (error) {
             console.log(error);
         } finally {
@@ -30,19 +32,19 @@ export default function EditFunction({ setIsEditing, subjectDetails }) {
                 />
                 {errors.name && <p className="error-message">{errors.name.message}</p>}
                 <input type="number" placeholder="Total Attended Classes..."
-                       {...register("totalClasses", {
-                           required: "Subject Total Classes is required",
-                           valueAsNumber: true
-                       })}
-                />
-                {errors.totalClasses && <p className="error-message">{errors.totalClasses.message}</p>}
-                <input type="number" placeholder="Total Classes..."
                        {...register("attendedClasses", {
                            required: "Subject Total Attended Classes is required",
                            valueAsNumber: true
                        })}
                 />
                 {errors.attendedClasses && <p className="error-message">{errors.attendedClasses.message}</p>}
+                <input type="number" placeholder="Total Classes..."
+                       {...register("totalClasses", {
+                           required: "Subject Total Classes is required",
+                           valueAsNumber: true
+                       })}
+                />
+                {errors.totalClasses && <p className="error-message">{errors.totalClasses.message}</p>}
                 <input type="text" placeholder="Faculty Name...(Optional)"
                        {...register("faculty")}
                 />

@@ -51,7 +51,7 @@ export default function SubjectCard({ name, attendedClasses, totalClasses, facul
         <div className="subject-card">
             { isEditing ? (
                 <Modal>
-                    <EditFunction setIsEditing={setIsEditing} subjectDetails={{ name, attendedClasses, totalClasses, faculty, dept, credits, _id }}/>
+                    <EditFunction setAttended={setAttended} setTotal={setTotal} setIsEditing={setIsEditing} subjectDetails={{ name, attendedClasses, totalClasses, faculty, dept, credits, _id }}/>
                 </Modal>    
             ) : (
                 <>
