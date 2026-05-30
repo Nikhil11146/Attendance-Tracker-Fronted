@@ -2,9 +2,9 @@
 
 A modern attendance management application that helps students track attendance, manage subjects, and monitor attendance percentages through a clean and intuitive interface.
 
-🌐 Live Demo: :contentReference[oaicite:0]{index=0}
+🌐 Live Demo: : https://attendance-tracker-application.netlify.app
 
-🔗 Backend Repository: :contentReference[oaicite:1]{index=1}
+🔗 Backend Repository: https://github.com/Nikhil11146/Attendance-Tracker-Backend
 
 ---
 
