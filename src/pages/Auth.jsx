@@ -4,9 +4,8 @@ import {useAuth} from "../context/AuthContext.jsx";
 
 export default function Auth() {
     const { register, handleSubmit, formState: { errors, isSubmitting  }} = useForm();
-    const [ isSignUp, setIsSignUp ] = useState(false);
     const [ apiError, setApiError ] = useState(null);
-    const { signIn, signUp } = useAuth();
+    const { signIn, signUp, isSignUp, setIsSignUp } = useAuth();
 
     const onSubmit = async (values) => {
         setApiError(null);
@@ -21,8 +20,8 @@ export default function Auth() {
 
     return (
         <div className="auth-page">
-            <h1 className="heading">{isSignUp ? "Sign Up" : "Sign In"}</h1>
             <div className="form-container">
+                <h1 className="heading">{isSignUp ? "Sign Up" : "Sign In"}</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input
                         autoComplete="username"
