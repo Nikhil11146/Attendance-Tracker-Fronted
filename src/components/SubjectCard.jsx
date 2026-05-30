@@ -6,7 +6,12 @@ export default function SubjectCard({ name, attendedClasses, totalClasses, facul
     const [attended, setAttended] = useState(attendedClasses);
     const [total, setTotal] = useState(totalClasses);
     const [updating, setUpdating] = useState(false);
-    const { updateSubject } = useSubject();
+    const [isDeleting, setIsDeleting] = useState(false);
+    const { updateSubject, deleteSubject } = useSubject();
+
+    function deletePopUp() {
+        setIsDeleting(true);
+    }
 
     async function attendClass() {
         setUpdating(true);
@@ -50,13 +55,21 @@ export default function SubjectCard({ name, attendedClasses, totalClasses, facul
                 {dept && (<div className="subj-dept">Dept: {dept}</div>)}
                 {credits && (<div className="subject-credits">Credits: {credits}</div>)}
             </div>
-            { updating ? (
+
+            { isDeleting ? (
+                <div className="confirm-dialog">
+                    <p className="dialog-text">Are you sure you want to delete, {name}</p>
+                    <button className="confirm-btn" onClick={() => deleteSubject(_id)}>Confirm</button>
+                    <button className="cancel-btn" onClick={() => setIsDeleting(false)}>cancel</button>
+                </div>
+            ) : updating ? (
                 <div className="subject-updating">Updating...</div>
             ) : (
                 <div className="subject-actions">
                     <button className="attended" onClick={() => attendClass()}>Attended(+)</button>
                     <button className="attended" onClick={() => missClass()}>Missed(-)</button>
                     <button className="edit-subject"><img src={editIcon} alt="edit" width="20" height="20"/></button>
+                    <button className="attended" onClick={() => deletePopUp(_id)}><img src="" alt="delete" width="20" height="20"/></button>
                 </div>
             )}
         </div>

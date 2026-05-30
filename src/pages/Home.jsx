@@ -3,15 +3,13 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import SubjectCard from "../components/SubjectCard.jsx";
 import {useSubject} from "../context/SubjectContext.jsx";
-import CreateWindow from "../components/CreateWindow.jsx";
+import CreateWindow from "../components/CreateWindow.jsx"
 
 export default function Home() {
     const navigate = useNavigate();
 
     const { isAuthenticated } = useAuth();
-    const { getSubjects } = useSubject();
-
-    const [subjects, setSubjects] = useState([]);
+    const { getSubjects, subjects, setSubjects } = useSubject();
     const [error, setError] = useState(null);
     const [ isLoading, setIsLoading ] = useState(true);
     const [isCreating, setIsCreating] = useState(false);
@@ -33,7 +31,7 @@ export default function Home() {
             }
         }
         getData();
-    }, [isAuthenticated, navigate, getSubjects]);
+    }, [isAuthenticated, navigate]);
 
     async function createSubjectCard() {
         setIsCreating(true);
@@ -42,7 +40,7 @@ export default function Home() {
     return (
         <div className="home-page">
             {isCreating && (
-                <CreateWindow/>
+                <CreateWindow onClose={() => setIsCreating(false)}/>
             )}
             <div className="home-page-header">
                 <h1 className="heading">Home</h1>

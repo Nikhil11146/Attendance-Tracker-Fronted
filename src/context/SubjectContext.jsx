@@ -1,9 +1,10 @@
-import {createContext, useContext} from "react";
+import {createContext, useContext, useState} from "react";
 import api from "../api/axios.js";
 
 const SubjectContext = createContext(null);
 
 export default function SubjectProvider({ children }) {
+    const [subjects, setSubjects] = useState([]);
     async function getSubjects() {
         const { data } = await api.get('/subjects');
 
@@ -16,8 +17,24 @@ export default function SubjectProvider({ children }) {
         await api.put(`/subjects/${_id}`, values);
     }
 
+    async function createSubject(values) {
+        const { data } = await api.post("/subjects", values)
+
+        if(data.success) {
+            setSubjects(prev => [ ...prev, data.data]);
+        }
+    }
+
+    async function deleteSubject(_id) {
+        const { data } = await api.delete(`/subjects/${_id}`);
+
+        if(data.success) {
+            setSubjects(prev => prev.filter(subject => subject._id !== _id));
+        }
+    }
+
     return (
-        <SubjectContext.Provider value={{ getSubjects, updateSubject }}>
+        <SubjectContext.Provider value={{ getSubjects, updateSubject, createSubject, subjects, setSubjects, deleteSubject }}>
             {children}
         </SubjectContext.Provider>
     )
