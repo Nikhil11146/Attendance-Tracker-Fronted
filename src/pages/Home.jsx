@@ -8,7 +8,7 @@ import CreateWindow from "../components/CreateWindow.jsx"
 export default function Home() {
     const navigate = useNavigate();
 
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, signOut } = useAuth();
     const { getSubjects, subjects, setSubjects } = useSubject();
     const [error, setError] = useState(null);
     const [ isLoading, setIsLoading ] = useState(true);
@@ -26,6 +26,7 @@ export default function Home() {
                 setSubjects(subjects);
             } catch(err) {
                 setError("Something went wrong!");
+                if(err.response?.status === 401) signOut();
                 console.log(err)
             } finally {
                 setIsLoading(false);

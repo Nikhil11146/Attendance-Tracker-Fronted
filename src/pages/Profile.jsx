@@ -3,11 +3,12 @@ import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 
 export default function Profile() {
-    const { isAuthenticated, user, signOutAll } = useAuth();
+    const { isAuthenticated, user, signOutAll, validateToken } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
         if(!isAuthenticated) navigate("/auth");
+        validateToken();
     }, [])
 
     return (

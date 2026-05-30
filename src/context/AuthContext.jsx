@@ -8,8 +8,24 @@ export default function AuthProvider({ children }) {
     const [ token, setToken ] = useState(localStorage.getItem("accessToken"));
     const [ user, setUser ] = useState(JSON.parse(localStorage.getItem("user")));
     const [ isSignUp, setIsSignUpState ] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(token !== null);
+    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("accessToken"));
     const navigate = useNavigate();
+
+    async function validateToken() {
+        try {
+            const { data } = await api.get("/subjects");
+
+            if(data.success) {
+                setIsAuthenticated(true);
+            }
+        } catch(error) {
+            console.log(error.response?.status);
+
+            if(error.response?.status === 401) {
+                signOut();
+            }
+        }
+    }
 
     function setIsSignUp(signUpState) {
         setIsSignUpState(signUpState);
@@ -51,12 +67,17 @@ export default function AuthProvider({ children }) {
     }
 
     async function signOutAll() {
-        await api.post("/auth/log-out-all");
-        signOut();
+        try {
+            await api.post("/auth/log-out-all");
+        } catch (e) {
+            console.log(e);
+        } finally {
+            signOut();
+        }
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, token, signUp, signIn, signOut, isSignUp, setIsSignUp, user, signOutAll }}>
+        <AuthContext.Provider value={{ isAuthenticated, token, signUp, signIn, signOut, isSignUp, setIsSignUp, user, signOutAll, validateToken }}>
             {children}
         </AuthContext.Provider>
     )
