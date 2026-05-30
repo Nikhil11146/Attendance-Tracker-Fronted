@@ -6,17 +6,13 @@ const AuthContext = createContext(null);
 
 export default function AuthProvider({ children }) {
     const [ token, setToken ] = useState(localStorage.getItem("accessToken"));
-    const [ user, setUser ] = useState(null);
+    const [ user, setUser ] = useState(JSON.parse(localStorage.getItem("user")));
     const [ isSignUp, setIsSignUpState ] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(token !== null);
     const navigate = useNavigate();
 
     function setIsSignUp(signUpState) {
         setIsSignUpState(signUpState);
-    }
-
-    async function initUser() {
-        // const {data} = await api.get("/user")
     }
 
     async function signUp(values) {
@@ -27,6 +23,7 @@ export default function AuthProvider({ children }) {
             setUser(data.data.user)
             setIsAuthenticated(true);
             localStorage.setItem("accessToken", data.data.token);
+            localStorage.setItem("user", JSON.stringify(data.data.user));
             navigate("/home", { replace: true });
         }
     }
@@ -39,12 +36,14 @@ export default function AuthProvider({ children }) {
             setUser(data.data.user)
             setIsAuthenticated(true);
             localStorage.setItem("accessToken", data.data.token);
+            localStorage.setItem("user", JSON.stringify(data.data.user));
             navigate("/home", { replace: true });
         }
     }
 
     function signOut() {
         localStorage.removeItem("accessToken");
+        localStorage.removeItem("user");
         setIsAuthenticated(false);
         setToken(null);
         setUser(null);
