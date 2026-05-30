@@ -1,11 +1,8 @@
 import {Link, useNavigate} from 'react-router-dom'
 import {useAuth} from "../context/AuthContext.jsx";
-import mainLogo from '../assets/app-logo-main-v2.png'
-import settingsIcon from '../assets/settings.jpg'
-import profileIcon from '../assets/test-account.jpg'
 
 export default function Navbar() {
-    const { isAuthenticated, signOut, setIsSignUp } = useAuth();
+    const { isAuthenticated, signOut, setIsSignUp, user } = useAuth();
     const navigate = useNavigate();
 
     return (
@@ -13,11 +10,11 @@ export default function Navbar() {
             <nav>
                 <div className="main-logo">
                     <Link to="/">
-                        <img src={mainLogo} alt="logo"/>
+                        Attendance Tracker
                     </Link>
                 </div>
                 <div className="navbar-links">
-                    <div className="navbar-app-links">
+                    <div className="navbar-app-links navbar-links-section">
                         <ul>
                             <li>
                                 <Link to="/">Home</Link>
@@ -27,13 +24,13 @@ export default function Navbar() {
                             </li>
                         </ul>
                     </div>
-                    <div className="navbar-auth-links">
+                    <div className="navbar-auth-links navbar-links-section">
                         {isAuthenticated ? (
                             <div className="user-profile-container">
-                                <p className="user-profile-navbar-heading">Hello, user</p>
-                                <button className="profile-btn" onClick={() => navigate('/profile')}><img src={profileIcon} alt="profile"/></button>
-                                <button className="profile-btn" onClick={() => navigate('/settings')}><img src={settingsIcon} alt="settings"/></button>
-                                <button className="profile-btn" onClick={signOut}>log out</button>
+                                <p className="user-profile-navbar-heading">Hello, {user.name}</p>
+                                <button className="profile-btn" onClick={() => navigate('/profile')}>Profile</button>
+                                <button className="profile-btn" onClick={() => navigate('/settings')}>Settings</button>
+                                <button className="profile-btn logout-btn" onClick={signOut}>log out</button>
                             </div>
                         ): (
                             <ul>

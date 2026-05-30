@@ -3,6 +3,7 @@ import deleteIcon from '../assets/delete-icon.png'
 import {useState} from "react";
 import {useSubject} from "../context/SubjectContext.jsx";
 import EditFunction from "./EditForm.jsx";
+import Modal from './Modal.jsx';
 
 export default function SubjectCard({ name, attendedClasses, totalClasses, faculty, dept, credits, _id }) {
     const [attended, setAttended] = useState(attendedClasses);
@@ -49,7 +50,9 @@ export default function SubjectCard({ name, attendedClasses, totalClasses, facul
     return (
         <div className="subject-card">
             { isEditing ? (
-                <EditFunction setIsEditing={setIsEditing} subjectDetails={{ name, attendedClasses, totalClasses, faculty, dept, credits, _id }}/>
+                <Modal>
+                    <EditFunction setIsEditing={setIsEditing} subjectDetails={{ name, attendedClasses, totalClasses, faculty, dept, credits, _id }}/>
+                </Modal>    
             ) : (
                 <>
                     <div className="subject-info">
@@ -64,21 +67,41 @@ export default function SubjectCard({ name, attendedClasses, totalClasses, facul
                     </div>
 
                     { isDeleting ? (
-                        <div className="confirm-dialog">
-                            <p className="dialog-text">Are you sure you want to delete, {name}</p>
-                            <button className="confirm-btn" onClick={() => deleteSubject(_id)}>Confirm</button>
-                            <button className="cancel-btn" onClick={() => setIsDeleting(false)}>cancel</button>
-                        </div>
-                    ) : updating ? (
-                        <div className="subject-updating">Updating...</div>
+                        <Modal>
+                            <div className="confirm-dialog">
+                                <p className="dialog-text">
+                                    Are you sure you want to delete {name}?
+                                </p>
+
+                                <div className="confirm-actions">
+                                    <button
+                                        className="cancel-btn"
+                                        onClick={() => setIsDeleting(false)}
+                                    >
+                                        Cancel
+                                    </button>
+
+                                    <button
+                                        className="confirm-btn"
+                                        onClick={() => deleteSubject(_id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </Modal>
                     ) : (
                         <div className="subject-actions">
-                            <button className="attended" onClick={() => attendClass()}>Attended(+)</button>
-                            <button className="attended" onClick={() => missClass()}>Missed(-)</button>
-                            <button className="edit-subject"  onClick={() => setIsEditing(true)}>
+                            <button className="attended" onClick={() => attendClass()} disabled={updating}>
+                                {updating ? "Updating..." : "Attended(+)"}
+                            </button>
+                            <button className="attended" onClick={() => missClass()} disabled={updating}>
+                                {updating ? "Updating..." : "Missed(-)"}
+                            </button>
+                            <button className="edit-subject"  onClick={() => setIsEditing(true)} disabled={updating}>
                                 <img src={editIcon} alt="edit" width="20" height="20"/>
                             </button>
-                            <button className="edit-subject" onClick={() => deletePopUp(_id)}>
+                            <button className="edit-subject" onClick={() => deletePopUp(_id)} disabled={updating}>
                                 <img src={deleteIcon} alt="delete" width="20" height="15"/>
                             </button>
                         </div>

@@ -5,15 +5,16 @@ export default function Settings() {
 
     return (
         <div className="settings-page">
-            <div className="navbar-theme-toggle">
+            <div className="settings-card">
+                <div>
+                    <h3>Theme</h3>
+                    <p>Switch between light and dark mode</p>
+                </div>
+
                 <button
-                    type="button"
                     className={`theme-toggle-btn ${theme}`}
                     onClick={handleThemeToggle}
-                    aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-                >
-                    <span className="sr-only">{theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}</span>
-                </button>
+                />
             </div>
         </div>
     )

@@ -26,6 +26,7 @@ export default function Home() {
                 setSubjects(subjects);
             } catch(err) {
                 setError("Something went wrong!");
+                console.log(err)
             } finally {
                 setIsLoading(false);
             }
@@ -52,8 +53,10 @@ export default function Home() {
                     <p className="subject-alt-text">Loading Data...</p>
                 ) : error ? (
                     <p className="subject-alt-text">{error}</p>
-                ) : (
+                ) : subjects.length > 0 ? (
                     subjects.map((subject) => ( <SubjectCard key={subject._id} {...subject}/>))
+                ) : (
+                    <p className="subject-alt-text">No Subjects Being Tracked</p>
                 )}
             </div>
         </div>

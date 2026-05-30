@@ -20,8 +20,8 @@ export default function Auth() {
 
     return (
         <div className="auth-page">
-            <h1 className="heading">{isSignUp ? "Sign Up" : "Sign In"}</h1>
             <div className="form-container">
+                <h1 className="heading">{isSignUp ? "Sign Up" : "Sign In"}</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input
                         autoComplete="username"
