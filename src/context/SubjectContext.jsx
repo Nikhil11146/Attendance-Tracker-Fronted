@@ -14,7 +14,9 @@ export default function SubjectProvider({ children }) {
     }
 
     async function updateSubject(values, _id) {
-        await api.put(`/subjects/${_id}`, values);
+        const {data} = await api.put(`/subjects/${_id}`, values);
+
+        setSubjects(prev => prev.map(subject => subject._id === _id ? data.data : subject))
     }
 
     async function createSubject(values) {

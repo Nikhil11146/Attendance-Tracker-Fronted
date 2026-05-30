@@ -30,12 +30,14 @@ export default function CreateWindow({onClose}) {
                     <input type="number" placeholder="Total Attended Classes..."
                            {...register("totalClasses", {
                                required: "Subject Total Classes is required",
+                               valueAsNumber: true
                            })}
                     />
                     {errors.totalClasses && <p className="error-message">{errors.totalClasses.message}</p>}
                     <input type="number" placeholder="Total Classes..."
                            {...register("attendedClasses", {
                                required: "Subject Total Attended Classes is required",
+                               valueAsNumber: true
                            })}
                     />
                     {errors.attendedClasses && <p className="error-message">{errors.attendedClasses.message}</p>}
@@ -43,7 +45,9 @@ export default function CreateWindow({onClose}) {
                            {...register("faculty")}
                     />
                     <input type="number" placeholder="Credits...(Optional)"
-                           {...register("credits")}
+                           {...register("credits", {
+                               valueAsNumber: true
+                           })}
                     />
                     <select {...register("dept", { setValueAs: value => value || undefined})}>
                         <option value="">Select Department..(Optional)</option>
