@@ -15,9 +15,9 @@ export default function Profile() {
             <h1 className="heading">Profile</h1>
             { user ? (
                 <div className="profile-info-container">
-                    <div className="profile-name">Name: {user.name}</div>
-                    <div className="profile-role">Role: {user.role}</div>
-                    <div className="profile-createdat">Joined{" "} {new Date(user.createdAt).toLocaleDateString("en-us", {
+                    <div className="profile-name">Name: {user?.name}</div>
+                    <div className="profile-role">Role: {user?.role}</div>
+                    <div className="profile-createdat">Joined{" "} {new Date(user?.createdAt).toLocaleDateString("en-us", {
                         year: "numeric",
                         month: "long",
                         day: "numeric"

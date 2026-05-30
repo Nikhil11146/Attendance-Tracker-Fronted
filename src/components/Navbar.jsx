@@ -27,7 +27,7 @@ export default function Navbar() {
                     <div className="navbar-auth-links navbar-links-section">
                         {isAuthenticated ? (
                             <div className="user-profile-container">
-                                <p className="user-profile-navbar-heading">Hello, {user.name}</p>
+                                <p className="user-profile-navbar-heading">Hello, {user?.name}</p>
                                 <button className="profile-btn" onClick={() => navigate('/profile')}>Profile</button>
                                 <button className="profile-btn" onClick={() => navigate('/settings')}>Settings</button>
                                 <button className="profile-btn logout-btn" onClick={signOut}>log out</button>
