@@ -1393,3 +1393,8 @@ body {
 .footer-link {
     font-size: 0.75rem;
 }
+
+.logoutall-btn {
+    margin: 1rem;
+    margin-left: 0;
+}

@@ -50,8 +50,13 @@ export default function AuthProvider({ children }) {
         navigate("/auth", { replace: true });
     }
 
+    async function signOutAll() {
+        await api.post("/auth/log-out-all");
+        signOut();
+    }
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, token, signUp, signIn, signOut, isSignUp, setIsSignUp, user }}>
+        <AuthContext.Provider value={{ isAuthenticated, token, signUp, signIn, signOut, isSignUp, setIsSignUp, user, signOutAll }}>
             {children}
         </AuthContext.Provider>
     )

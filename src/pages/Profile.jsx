@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 
 export default function Profile() {
-    const { isAuthenticated, user } = useAuth();
+    const { isAuthenticated, user, signOutAll } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,6 +26,7 @@ export default function Profile() {
             ) : (
                 <h1>Loading...</h1>
             )}
+            <button className="profile-btn logout-btn logoutall-btn" onClick={signOutAll}>log out from all devices</button>
 
         </div>
     )
